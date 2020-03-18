@@ -1,6 +1,7 @@
-﻿using DG.Tweening;
-using System.Collections;
+﻿using DapperDino.GettingStarted.Tweening.Inputs;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace DapperDino.GettingStarted.Tweening
 {
@@ -9,31 +10,36 @@ namespace DapperDino.GettingStarted.Tweening
         private bool isMyTurn = true;
         private bool isFlipping = false;
 
-        private void OnMouseDown() => TryChangeTurn();
+        private Controls controls;
 
-        private void TryChangeTurn()
+        private void Awake()
         {
-            if (isFlipping) { return; }
-
-            StartCoroutine(ChangeTurn());
+            controls = new Controls();
+            controls.Player.ChangeTurn.performed += ctx => FlipButton();
         }
 
-        private IEnumerator ChangeTurn()
-        {
-            isFlipping = true;
+        private void OnEnable() => controls.Enable();
+        private void OnDisable() => controls.Disable();
 
-            isMyTurn = !isMyTurn;
+        private void OnMouseDown()
+        {
+            FlipButton();
+        }
+
+        private void FlipButton()
+        {
+            if (isFlipping) { return; }
 
             float rotation = isMyTurn ? 0f : 180f;
             float targetRotation = rotation == 0f ? 180f : 0f;
 
             var tweener = DOTween.To(() => rotation, x => rotation = x, targetRotation, 1f)
                 .SetEase(Ease.OutBack)
-                .OnUpdate(() => transform.eulerAngles = new Vector3(rotation, 0f, 0f));
+                .OnStart(() => isFlipping = true)
+                .OnUpdate(() => transform.eulerAngles = new Vector3(rotation, 0f, 0f))
+                .OnComplete(() => isFlipping = false);
 
-            while (tweener.IsActive()) { yield return null; }
-
-            isFlipping = false;
+            isMyTurn = !isMyTurn;
         }
     }
 }
