@@ -1,7 +1,6 @@
-﻿using DapperDino.GettingStarted.Tweening.Inputs;
+﻿using DapperDino.Inputs;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace DapperDino.GettingStarted.Tweening
 {

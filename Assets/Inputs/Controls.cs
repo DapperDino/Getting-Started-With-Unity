@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Tutorials/DOTween/Controls.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Controls.inputactions'
 
 using System;
 using System.Collections;
@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-namespace DapperDino.GettingStarted.Tweening.Inputs
+namespace DapperDino.Inputs
 {
     public class @Controls : IInputActionCollection, IDisposable
     {
