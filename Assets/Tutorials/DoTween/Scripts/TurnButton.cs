@@ -1,11 +1,15 @@
 ﻿using DapperDino.Inputs;
 using DG.Tweening;
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace DapperDino.GettingStarted.Tweening
 {
     public class TurnButton : MonoBehaviour
     {
+        [SerializeField] private UnityBoolEvent onFinishedFlipping = new UnityBoolEvent();
+
         private bool isMyTurn = true;
         private bool isFlipping = false;
 
@@ -36,9 +40,16 @@ namespace DapperDino.GettingStarted.Tweening
                 .SetEase(Ease.OutBack)
                 .OnStart(() => isFlipping = true)
                 .OnUpdate(() => transform.eulerAngles = new Vector3(rotation, 0f, 0f))
-                .OnComplete(() => isFlipping = false);
+                .OnComplete(() =>
+                {
+                    isFlipping = false;
+                    onFinishedFlipping?.Invoke(isMyTurn);
+                });
 
             isMyTurn = !isMyTurn;
         }
     }
+
+    [Serializable]
+    public class UnityBoolEvent : UnityEvent<bool> { }
 }

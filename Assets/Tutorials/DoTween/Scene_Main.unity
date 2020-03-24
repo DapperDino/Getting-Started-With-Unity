@@ -812,6 +812,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23435aecb1331b34b8e4c5476d5c7049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onFinishedFlipping:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 244240682}
+        m_MethodName: set_enabled
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1581199782
 GameObject:
   m_ObjectHideFlags: 0
